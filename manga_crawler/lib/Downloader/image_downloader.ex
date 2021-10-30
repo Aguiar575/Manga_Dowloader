@@ -15,10 +15,10 @@ defmodule  MangaCrawler.ImageDownloader do
   end
 
   def downloadImage(url) do
-    IO.puts(url)
-    {:ok, resp} = :httpc.request(:get, {url, []}, [], [body_format: :binary])
+    urlWithoutBLank = String.replace(url, " ", "%20")
+    {:ok, resp} = :httpc.request(:get, {urlWithoutBLank, []}, [], [body_format: :binary])
     {{_, 200, 'OK'}, _headers, body} = resp
-    writeFile(body, downloadDir() <> getPageNumer(url) <> ".png")
+    writeFile(body, downloadDir() <> getPageNumer(urlWithoutBLank) <> ".png")
   end
 
   def writeFile(bites, path) do
@@ -27,5 +27,6 @@ defmodule  MangaCrawler.ImageDownloader do
     end
   end
 end
+
 #https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png
 #"https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png" |> MangaCrawler.ImageDownloader.getPageNumer()
