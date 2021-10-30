@@ -1,6 +1,7 @@
 defmodule MangaCrawler do
 
   use HTTPoison.Base
+  alias MangaCrawler.ImageDownloader
   @moduledoc """
   Documentation for `MangaCrawler`.
   """
@@ -18,6 +19,7 @@ defmodule MangaCrawler do
     |> requestSite()
     |> getMangaList()
     |> getMangaPagesFromList()
+    |> ImageDownloader.downloadListOfImages()
   end
 
   defp requestSite(url) do
@@ -33,7 +35,7 @@ defmodule MangaCrawler do
 
   defp getMangaList(body) do
     body
-    |> Floki.find("div.container-chapter-reader img")
+    |> Floki.find("div.text-center img")
   end
 
   defp getMangaPagesFromList(items) do
@@ -43,4 +45,4 @@ defmodule MangaCrawler do
 
 end
 
-#"https://readmanganato.com/manga-aa951409/chapter-1" |> MangaCrawler.requestSite
+#"https://unionmangas.top/leitor/Boku_no_Hero_Academia_(pt-br)/331" |> MangaCrawler.getMangaByUrl
