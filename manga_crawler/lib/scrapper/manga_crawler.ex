@@ -1,29 +1,19 @@
 defmodule MangaCrawler do
 
   use HTTPoison.Base
-  @moduledoc """
-  Documentation for `MangaCrawler`.
-  """
 
-  @doc """
-    Get manga from url.
-
-    ## Examples
-
-        iex> MangaCrawler.getMangaByUrl("http://www.mangareader.net/naruto/")
-        :Naruto
-    """
   def getMangaByUrl(url) do
+    IO.puts("Downloading manga from: "<>url)
     url
     |> requestSite()
-    |> getMangaList()
-    |> getMangaPagesFromList()
   end
 
   defp requestSite(url) do
-    case HTTPoison.get(url) do
+    case HTTPoison.get(url, [], [timeout: 30000, recv_timeout: 30000]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-         body
+        body
+        |> getMangaList()
+        |> getMangaPagesFromList()
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         IO.puts "Not found :("
       {:error, %HTTPoison.Error{reason: reason}} ->
@@ -43,4 +33,4 @@ defmodule MangaCrawler do
 
 end
 
-#"https://unionmangas.top/leitor/Boku_no_Hero_Academia_(pt-br)/331" |> MangaCrawler.Interface.downlaodCapInFolder()
+#"http://unionleitor.top/leitor/Kimetsu_no_Yaiba/02" |> MangaCrawler.Interface.downlaodCapInPdf()

@@ -24,3 +24,7 @@ manga_crawler-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+/mangalib
+
+.DS_Store
