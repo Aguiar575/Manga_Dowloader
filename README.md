@@ -18,7 +18,7 @@ Using the mix download all the necessary dependencies.
 mix deps.get 
 ```
 
-Attention this client is only compatible with the site (Union Mangás)[https://unionmangas.top/home], other sites may not return the desired result.
+Attention this client is only compatible with the site [Union Mangás](https://unionmangas.top/home), other sites may not return the desired result.
 
 ```elixir
 mix run manga_downloader.exs 
