@@ -1,21 +1,25 @@
 # MangaCrawler
 
-**TODO: Add description**
+Manga downloader client adapted to download chapters from the website [Union Mangás](https://unionmangas.top/home).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `manga_crawler` to your list of dependencies in `mix.exs`:
+to use the pdf generator you will need to have the `Pillow` library installed on your machine, the default version of the converter is python3.9, but you can change it by editing the Conversor/pdf_conversor.ex file.
 
-```elixir
-def deps do
-  [
-    {:manga_crawler, "~> 0.1.0"}
-  ]
-end
+```python
+pip install Pillow
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/manga_crawler](https://hexdocs.pm/manga_crawler).
+## Using the downloader 
 
+Using the mix download all the necessary dependencies.
+
+```elixir
+mix deps.get 
+```
+
+Attention this client is only compatible with the site (Union Mangás)[https://unionmangas.top/home], other sites may not return the desired result.
+
+```elixir
+mix run manga_downloader.exs 
+```
