@@ -1,19 +1,20 @@
-defmodule MangaCrawler do
+defmodule MangaCrawler.UnionMangasAdapter do
 
   use HTTPoison.Base
 
-  def getMangaByUrl(url) do
+  @spec get_manga_url(binary) :: any
+  def get_manga_url(url) do
     IO.puts("Downloading manga from: "<>url)
     url
-    |> requestSite()
+    |> request_site()
   end
 
-  defp requestSite(url) do
+  defp request_site(url) do
     case HTTPoison.get(url, [], [timeout: 30000, recv_timeout: 30000]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         body
-        |> getMangaList()
-        |> getMangaPagesFromList()
+        |> get_manga_list()
+        |> get_manga_pages()
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         IO.puts "Not found :("
       {:error, %HTTPoison.Error{reason: reason}} ->
@@ -21,16 +22,14 @@ defmodule MangaCrawler do
     end
   end
 
-  defp getMangaList(body) do
+  defp get_manga_list(body) do
     body
     |> Floki.find("div.text-center img")
   end
 
-  defp getMangaPagesFromList(items) do
+  defp get_manga_pages(items) do
     items
     |> Floki.attribute("src")
   end
 
 end
-
-#"http://unionleitor.top/leitor/Kimetsu_no_Yaiba/02" |> MangaCrawler.Interface.downlaodCapInPdf()
