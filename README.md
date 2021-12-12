@@ -1,4 +1,4 @@
-# Mang_Downloader
+# Manga_Downloader
 
 Manga downloader client adapted to download chapters from the website [Union Mangás](https://unionmangas.top/home).
 
