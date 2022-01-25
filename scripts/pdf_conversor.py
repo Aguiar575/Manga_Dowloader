@@ -5,7 +5,7 @@ from PIL import Image
 path = str(argv[1]).replace("/", "//")
 
 imagelist= listdir(path)
-for fichier in imagelist[:]: # filelist[:] makes a copy of filelist.
+for fichier in imagelist[:]: 
     if not(fichier.endswith(".jpg")):
         imagelist.remove(fichier)
 
