@@ -1,10 +1,11 @@
 defmodule MangaCrawler.Client.DownloadImages do
+  @behaviour MangaCrawler.Behaviours.Client
+
   alias MangaCrawler.HandleWithImgList
   alias MangaCrawler.Scrapper
   alias MangaCrawler.ImgExtractor
 
-  @spec get_manga(binary) ::
-          {:error, any} | {:not_found, <<_::64, _::_*8>>} | {:ok, <<_::24, _::_*8>>}
+  @spec get_manga(binary) :: {:error, any} | {:not_found, <<_::64, _::_*8>>}
   def get_manga(url) do
     response = Scrapper.request_url(url)
 
