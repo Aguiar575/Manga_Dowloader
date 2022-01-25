@@ -24,7 +24,7 @@ defmodule MangaCrawler.Client.DownloadPdf do
     end
   end
 
-  @spec get_pdf({:error, any} | {:ok, any}) :: {:error, any} | {:ok, port}
+  @spec get_pdf({:error, any} | {:ok, any}) :: {:error, any} | {:ok, any}
   def get_pdf(response) do
     case response do
       {:ok, chapter_path} -> PdfConversor.to_pdf(chapter_path)
