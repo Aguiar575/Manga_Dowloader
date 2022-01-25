@@ -18,10 +18,10 @@ defmodule MangaCrawler.ImageDownloader do
   end
 
   defp get_path_to_save(url) do
-    listOfContents = url |> String.replace(" ", "_") |> String.split("/")
+    folder_structure = url |> String.replace(" ", "_") |> String.split("/")
 
     (File.cwd!() <> "/mangalib")
-    |> download_dir(Enum.at(listOfContents, -3), Enum.at(listOfContents, -2))
+    |> download_dir(Enum.at(folder_structure, -3), Enum.at(folder_structure, -2))
   end
 
   defp save_file(bites, path) do
